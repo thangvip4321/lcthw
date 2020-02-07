@@ -1,0 +1,11 @@
+how to install it.
+just :
+	make install
+instruction:
+	make an database of downloaded URL: devpkg -S
+	install: devpkg -I <url>
+	fetch an URL: devpkg -F <url>
+	build a software from a fetched URL: devpkg -B <url>
+	additional args :-i<install options> 
+	-c<configure options> 
+	-m<make options>

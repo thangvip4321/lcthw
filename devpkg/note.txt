@@ -1,0 +1,2 @@
+db.c instead of put the data into a bstring, which reduce search time, instead turn the data into a bstring list.
+shell.c : element "replace" in struct Shell, should be an array consisting of 1 and 0, 1 for need to change, 0 for no. if it is an int only, u cant manage what's being changed and what's not.

@@ -1,0 +1,1323 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"te",
+				"test_delete"
+			],
+			[
+				"m",
+				"mu_run_test"
+			],
+			[
+				"s",
+				"stats"
+			],
+			[
+				"co",
+				"commandl"
+			],
+			[
+				"delete",
+				"delete_request"
+			],
+			[
+				"com",
+				"commandd"
+			],
+			[
+				"re",
+				"read_request"
+			],
+			[
+				"create",
+				"create_request"
+			],
+			[
+				"stat",
+				"stats_packet"
+			],
+			[
+				"TS",
+				"TSTree"
+			],
+			[
+				"Sta",
+				"Stats_sample"
+			],
+			[
+				"bstr",
+				"bstrList"
+			],
+			[
+				"sta",
+				"stats_packet"
+			],
+			[
+				"pack",
+				"pack"
+			],
+			[
+				"T",
+				"TSTree_search"
+			],
+			[
+				"St",
+				"Stats_create"
+			],
+			[
+				"stats",
+				"stats_packet"
+			],
+			[
+				"error",
+				"error_code"
+			],
+			[
+				"ad",
+				"addr_storage"
+			],
+			[
+				"th",
+				"threads"
+			],
+			[
+				"client",
+				"clients_num"
+			],
+			[
+				"so",
+				"sock_pack"
+			],
+			[
+				"sock",
+				"sock_pack"
+			],
+			[
+				"add",
+				"addr_size"
+			],
+			[
+				"addr",
+				"addr_storage"
+			],
+			[
+				"cl",
+				"clients_num"
+			],
+			[
+				"MA",
+				"QUEUE_MAX"
+			],
+			[
+				"clone",
+				"clone_args"
+			],
+			[
+				"chil",
+				"child_handler"
+			],
+			[
+				"par",
+				"parent_tid"
+			],
+			[
+				"Magne",
+				"MagneticField"
+			],
+			[
+				"R",
+				"RingBuffer_starts_at"
+			],
+			[
+				"mu",
+				"mu_assert"
+			],
+			[
+				"soc",
+				"sockaddr_storage"
+			],
+			[
+				"the",
+				"their_addr"
+			],
+			[
+				"TST",
+				"TSTree"
+			],
+			[
+				"e",
+				"equal"
+			],
+			[
+				"TSTree",
+				"TSTree_search"
+			],
+			[
+				"Ri",
+				"RingBuffer_ends_at"
+			],
+			[
+				"Ring",
+				"RingBuffer_ends_at"
+			],
+			[
+				"Rin",
+				"RingBuffer_commit_write"
+			],
+			[
+				"route",
+				"routes_map"
+			],
+			[
+				"temp",
+				"temp_num"
+			],
+			[
+				"Suffix",
+				"Suffix_Node"
+			],
+			[
+				"ac",
+				"active_length"
+			],
+			[
+				"active",
+				"active_length"
+			],
+			[
+				"S",
+				"Suffix_edge"
+			],
+			[
+				"activ",
+				"active_length"
+			],
+			[
+				"No",
+				"Suffix_Node"
+			],
+			[
+				"Su",
+				"Suffix_Node"
+			],
+			[
+				"Suff",
+				"Suffix_Node"
+			],
+			[
+				"state",
+				"state_belief"
+			],
+			[
+				"mea",
+				"measure_matrix"
+			],
+			[
+				"cov",
+				"cov_belief"
+			],
+			[
+				"start",
+				"start_position"
+			],
+			[
+				"lat",
+				"latitude"
+			],
+			[
+				"tstree",
+				"TSTree"
+			],
+			[
+				"test_se",
+				"test_search_exact"
+			],
+			[
+				"traverse",
+				"traverse_count"
+			],
+			[
+				"tr",
+				"traverse_count"
+			],
+			[
+				"str",
+				"strlen"
+			],
+			[
+				"TStree",
+				"TSTree_search_prefix"
+			],
+			[
+				"h",
+				"high"
+			],
+			[
+				"size",
+				"size_t"
+			],
+			[
+				"TSTree_tra",
+				"TSTree_traverse_cb"
+			],
+			[
+				"dire",
+				"directions_result1"
+			],
+			[
+				"di",
+				"directions_result1"
+			],
+			[
+				"data",
+				"data"
+			],
+			[
+				"magnetic",
+				"magnetic_field"
+			],
+			[
+				"lon",
+				"longitude"
+			],
+			[
+				"proce",
+				"process_quarternion"
+			],
+			[
+				"receive",
+				"receive_gps"
+			],
+			[
+				"p",
+				"publish"
+			],
+			[
+				"cur",
+				"cur_loc"
+			],
+			[
+				"ca",
+				"calc_bearing_distance"
+			],
+			[
+				"del",
+				"deltalon"
+			],
+			[
+				"delta",
+				"deltalat"
+			],
+			[
+				"bera",
+				"bearings"
+			],
+			[
+				"d",
+				"directions_result1"
+			],
+			[
+				"direc",
+				"directions_result"
+			],
+			[
+				"hello",
+				"hello_str2"
+			],
+			[
+				"che",
+				"check_debug"
+			],
+			[
+				"read",
+				"read_some"
+			],
+			[
+				"nonblo",
+				"nonblocking"
+			],
+			[
+				"PRO",
+				"PROGRAMS"
+			],
+			[
+				"slow",
+				"slow_start"
+			],
+			[
+				"dat",
+				"data_avail"
+			],
+			[
+				"PROT",
+				"PROT_READ"
+			],
+			[
+				"RingB",
+				"RingBuffer"
+			],
+			[
+				"amount",
+				"amount"
+			],
+			[
+				"test",
+				"test_destroy"
+			],
+			[
+				"RingBuffer_av",
+				"RingBuffer_available_data"
+			],
+			[
+				"RIn",
+				"RingBuffer"
+			],
+			[
+				"DA",
+				"DArray_count"
+			],
+			[
+				"D",
+				"DArray_count"
+			],
+			[
+				"he",
+				"display_heading_line"
+			],
+			[
+				"st",
+				"steering_angle"
+			],
+			[
+				"angl",
+				"angle_to_mid_radian"
+			],
+			[
+				"right",
+				"right_line"
+			],
+			[
+				"left",
+				"left_line"
+			],
+			[
+				"lines",
+				"lines"
+			],
+			[
+				"su",
+				"sumsq"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "bin/stats_server.c",
+			"settings":
+			{
+				"buffer_size": 4335,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test/proc_request_tests.c",
+			"settings":
+			{
+				"buffer_size": 2628,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/proc_request.c",
+			"settings":
+			{
+				"buffer_size": 8895,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/lcthw/tstree.h",
+			"settings":
+			{
+				"buffer_size": 1296,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/tstree.c",
+			"settings":
+			{
+				"buffer_size": 8992,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/tstree_tests.c",
+			"settings":
+			{
+				"buffer_size": 2908,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/test.sh",
+			"settings":
+			{
+				"buffer_size": 654,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/lcthw/bstrlib.h",
+			"settings":
+			{
+				"buffer_size": 15336,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/server.c",
+			"settings":
+			{
+				"buffer_size": 3741,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/stats.c",
+			"settings":
+			{
+				"buffer_size": 823,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bin/urlor.c",
+			"settings":
+			{
+				"buffer_size": 2588,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/lcthw/server.h",
+			"settings":
+			{
+				"buffer_size": 699,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "makefile",
+			"settings":
+			{
+				"buffer_size": 1460,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/server_tests.c",
+			"settings":
+			{
+				"buffer_size": 1533,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/lcthw/ringbuffer.h",
+			"settings":
+			{
+				"buffer_size": 1924,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Makefile/Make.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				"Clean"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/E/gay/liblcthw/test",
+		"/E/gay/liblcthw/src",
+		"/E/gay/liblcthw/bin"
+	],
+	"file_history":
+	[
+		"/E/gay/liblcthw/test/test.sh",
+		"/home/thang/test.c",
+		"/media/thang/DATA/gay/liblcthw/a.out",
+		"/media/thang/DATA/gay/liblcthw/test/#test.sh#",
+		"/media/thang/DATA/gay/liblcthw/server.sublime-project",
+		"/media/thang/DATA/gay/liblcthw/bin/netclient.c",
+		"/media/thang/DATA/gay/liblcthw/test/try_server.sh",
+		"/home/thang/udo_lessons/reverse.sh",
+		"/home/thang/udo_lessons/bc.sh",
+		"/home/thang/udo_lessons/gay.sh",
+		"/home/thang/udo_lessons/ex.sh",
+		"/home/thang/catkin_ws/src/imu_compass/src/imu_compass.cpp",
+		"/home/thang/server.c",
+		"/home/thang/catkin_ws/src/imu_compass/include/imu_compass/imu_compass.h",
+		"/home/thang/imu_compass/include/imu_compass/imu_compass.h",
+		"/home/thang/imu_compass/src/imu_compass.cpp",
+		"/home/thang/catkin_ws/src/robot_arm_ros/diff_drive/urdf/02-diff_drive.urdf.xacro",
+		"/home/thang/cpp_ws/src/learning_tf2/nodes/static_turtle_tf2_broadcaster.py",
+		"/home/thang/quynhidea.py",
+		"/media/thang/DATA/gay/liblcthw/src/suffix_tree.c",
+		"/home/thang/gm.py",
+		"/home/thang/test_nan.py",
+		"/home/thang/gps_retrieve.py",
+		"/media/thang/DATA/gay/liblcthw/src/bstree.c",
+		"/home/thang/read.py",
+		"/home/thang/xxx.py",
+		"/media/thang/DATA/gay/liblcthw/src/server.c",
+		"/media/thang/DATA/gay/liblcthw/src/darray_algos.c",
+		"/media/thang/DATA/gay/liblcthw/bin/stats_server.c",
+		"/media/thang/DATA/gay/liblcthw/handler.c",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/server.h",
+		"/media/thang/DATA/gay/liblcthw/test/server_tests.c",
+		"/media/thang/DATA/gay/liblcthw/test/darray_algos_tests.c",
+		"/media/thang/DATA/gay/liblcthw/src/tstree.c",
+		"/media/thang/DATA/gay/liblcthw/src/proc_request.c",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/proc_request.h",
+		"/media/thang/DATA/gay/liblcthw/src/stats.c",
+		"/media/thang/DATA/gay/liblcthw/stat_server/test.c",
+		"/media/thang/DATA/gay/liblcthw/test/tstree_tests.c",
+		"/media/thang/DATA/gay/liblcthw/stat_server/wow.c",
+		"/media/thang/DATA/gay/liblcthw/bin/wow.c",
+		"/media/thang/DATA/gay/ex35.c",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/stats.h",
+		"/media/thang/DATA/gay/liblcthw/stat_server/bstrlib.c",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/bstrlib.c",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/bstrlib.h",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/tstree.h",
+		"/media/thang/DATA/gay/liblcthw/makefile",
+		"/home/thang/catkin_ws/src/hello_world/scripts/talker.py",
+		"/home/thang/catkin_ws/src/hello_world/scripts/listener.py",
+		"/media/thang/DATA/gay/liblcthw/bin/urlor.c",
+		"/media/thang/DATA/gay/liblcthw/src/ringbuffer.c",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/ringbuffer.h",
+		"/media/thang/DATA/gay/liblcthw/test/minunit.h",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/darray.h",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/suffix_tree.h",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/queue.h",
+		"/media/thang/DATA/gay/liblcthw/test/suffix_tree_tests.c",
+		"/media/thang/DATA/gay/liblcthw/test/stats_tests.c",
+		"/media/thang/DATA/gay/liblcthw/test/hashmap_tests.c",
+		"/home/thang/imu_compass/scripts/compute_calibration",
+		"/media/thang/DATA/gay/liblcthw/test/queue_tests.c",
+		"/home/thang/run.c",
+		"/media/thang/DATA/gay/liblcthw/src/darray.c",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/dbg.h",
+		"/media/thang/DATA/gay/test.c",
+		"/home/thang/test_img.py",
+		"/home/thang/wow.c",
+		"/home/thang/ccc.py",
+		"/home/thang/road_process.py",
+		"/home/thang/xyz.py",
+		"/media/thang/Acer/imu_compass/src/imu_compass.cpp",
+		"/home/thang/catkin_ws/src/hello_world/scripts/receiver.py",
+		"/home/thang/catkin_ws/src/hello_world/scripts/sender.py",
+		"/media/thang/DATA/gay/liblcthw/test/string_algos_tests.c",
+		"/media/thang/DATA/gay/liblcthw/test/ringbuffer_tests.c",
+		"/home/thang/qqq.py",
+		"/media/thang/DATA/gay/liblcthw/src/lcthw/radixmap.h",
+		"/media/thang/DATA/gay/liblcthw/test/bstree_tests.c",
+		"/media/thang/DATA/gay/liblcthw/proc.c",
+		"/media/thang/DATA/gay/liblcthw/reporter.c",
+		"/media/thang/DATA/gay/ex17.c",
+		"/media/thang/DATA/gay/liblcthw/test/reporter.c",
+		"/home/thang/catkin_ws/src/read/src/read.py",
+		"/media/thang/DATA/gay/liblcthw/devpkg/devpkg.c"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"TSTree_with_delimiter",
+			"bstrList",
+			"root",
+			"*root",
+			"roo*",
+			"root",
+			"*root",
+			"echo",
+			"vector",
+			"st",
+			"root",
+			"checkpoint",
+			"btrim",
+			"btrimws",
+			"bsplit",
+			"btrimws",
+			"string",
+			"65",
+			"imu_heading_estimator",
+			"decl_sub_",
+			"RingBuffer_available_data(B)"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"TSTree_delim",
+			"root",
+			"magnetic_field",
+			"stat0",
+			"*root",
+			"position",
+			"String",
+			"97",
+			"(B)->data_avail"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "bin/stats_server.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4335,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 201.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "test/proc_request_tests.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2628,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								570,
+								570
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/proc_request.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8895,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 806.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/lcthw/tstree.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1296,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/tstree.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8992,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7623,
+								7623
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3944.8,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "test/tstree_tests.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2908,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2788,
+								2788
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 109.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "test/test.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 654,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								67,
+								24
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Bash.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/lcthw/bstrlib.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15336,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4446,
+								4446
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 986.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/server.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3741,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								785,
+								785
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/stats.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 823,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								575,
+								575
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "bin/urlor.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2588,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								808,
+								808
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/lcthw/server.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 699,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								423,
+								423
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								487,
+								487
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "test/server_tests.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1413,
+								1413
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "src/lcthw/ringbuffer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1924,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 108.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 28.0
+	},
+	"pinned_build_system": "",
+	"project": "server.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"/media/thang/DATA/gay/liblcthw/server.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"$(PROGRAMS)"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

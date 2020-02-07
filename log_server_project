@@ -1,0 +1,50 @@
+ok so i read clone3():
+long clone3(struct clone_args args, size_t size);
+struct clone_args {
+u64 flags; //flags bit mask
+u64 pidfd; //pointer to store PID fd
+u64 child_tid; //where to store child TID in child's mem
+u64 parent_tid; //where to store child TID in parent's mem
+u64 exit_signal; // signal to send to parent if child is terminated
+u64 stack; // ok here's the confusing part: this point to the stack we're working on, (from the lowest byte upward)
+u64 stack_size; // and this is its size , make them NULL and 0 to indicate that the child will work on the same stack memory
+u64 tls //wait lemme check
+}
+
+error1: when 1 client log out, the server also exit?
+exit() wrong?
+-> gdb -> SIGPIPE? -> so default action of sigpipe is to terminate process
+interesting fact: SA_Restart affect recv , i saw it retry twice???????? (theory)
+
+Work around :v : https://stackoverflow.com/questions/19509348/sigpipe-osx-and-disconnected-sockets/19510395#19510395
+2 options ppl suggest
+1.basically set socket option to SO_NOSIGPIPE
+ok recv is not affected by shutdown, it just return 0 on disconnection :v
+2.change SIGPIPE to SIG_IGN, however i think this is just a workaround, since it may have effects not only on socket but the whole application.
+3. config send with MSG_NOSIGNAL, seems legit, still return EPIPE but not SIGPIPE signal
+however we have to check while condition or else the server will run forever
+
+### to do list:
+improve on process_request structure
++change data structure to: - name + -stats (done)
++ delete current list function it's bullshit (done :v)
+can we put client_process in a seperate file for unit test? (should not i think, for a later date)
+
+error2: segfault on list and buffer overrun on delete?
+buffer overrun on delete <-bad memory release. 
++should free and set it to NULL afterward.
++ delete function does not provide the original location of the pack, only the copy, so making it NULL won't do.
+Solution: use TSTree_delete (and fix it so it stop pushing over the last node).
+
+-To do?
++repair list?(ok done.again, if we use over 1024*1024 it may cause an overflow,might put some constraint on it)
++also implement prefix search+ suffix check for .com,.vn,...?
++fix TSTree_delete so it can properly delete value not initialized by malloc() (hard shit)
+
++prefix search will suggest the one that match?
+
+node->stat empty, why? should be &node on test :v
+suspecting that creating Stats only at delimiter node may leave many node:
+1. not NULL
+2. not delimiter
+Stats-less. ->cause segfault when trying to access?

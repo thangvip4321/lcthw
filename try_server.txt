@@ -1,0 +1,47 @@
+DEBUG: (bin/stats_server.c :69 :main) the pointer to root has address: 0x7ffd7b7d2458
+DEBUG: (bin/stats_server.c :83 :main) still ok here
+DEBUG: (bin/stats_server.c :87 :main) client number: 0
+DEBUG: (bin/stats_server.c :87 :main) client number: 1
+DEBUG: (bin/stats_server.c :87 :main) client number: 2
+DEBUG: (bin/stats_server.c :87 :main) client number: 3
+DEBUG: (bin/stats_server.c :87 :main) client number: 4
+DEBUG: (bin/stats_server.c :87 :main) client number: 5
+DEBUG: (bin/stats_server.c :87 :main) client number: 6
+DEBUG: (bin/stats_server.c :87 :main) client number: 7
+DEBUG: (bin/stats_server.c :87 :main) client number: 8
+DEBUG: (bin/stats_server.c :87 :main) client number: 9
+DEBUG: (bin/stats_server.c :50 :client_process) start reading
+DEBUG: (src/server.c :24 :read_some) fd is : 4 :2
+DEBUG: (src/server.c :28 :read_some) ok then byte_recv is 0
+DEBUG: (src/server.c :29 :read_some) hmmmmm
+ERROR: (src/ringbuffer.c : 112 :RingBuffer_gets :errno None )Need more than 0 for gets,you gave 0
+DEBUG: (bin/stats_server.c :58 :client_process) ok after read_some, maybe the problem in send
+DEBUG: (bin/stats_server.c :50 :client_process) start reading
+DEBUG: (src/server.c :24 :read_some) fd is : 4 :2
+DEBUG: (src/server.c :28 :read_some) ok then byte_recv is 0
+DEBUG: (src/server.c :29 :read_some) hmmmmm
+ERROR: (src/ringbuffer.c : 112 :RingBuffer_gets :errno None )Need more than 0 for gets,you gave 0
+DEBUG: (bin/stats_server.c :58 :client_process) ok after read_some, maybe the problem in send
+DEBUG: (bin/stats_server.c :50 :client_process) start reading
+DEBUG: (src/server.c :24 :read_some) fd is : 5 :2
+DEBUG: (src/server.c :28 :read_some) ok then byte_recv is 31
+DEBUG: (src/server.c :29 :read_some) hmmmmm
+DEBUG: (src/proc_request.c :87 :process_request) command is create gay
+delete gay
+read gay
+
+DEBUG: (src/proc_request.c :90 :process_request) data is : create and name is gay
+delete
+DEBUG: (bin/stats_server.c :58 :client_process) ok after read_some, maybe the problem in send
+DEBUG: (bin/stats_server.c :50 :client_process) start reading
+DEBUG: (src/server.c :24 :read_some) fd is : 5 :2
+DEBUG: (src/server.c :28 :read_some) ok then byte_recv is 0
+DEBUG: (src/server.c :29 :read_some) hmmmmm
+ERROR: (src/ringbuffer.c : 112 :RingBuffer_gets :errno None )Need more than 0 for gets,you gave 0
+DEBUG: (bin/stats_server.c :58 :client_process) ok after read_some, maybe the problem in send
+DEBUG: (bin/stats_server.c :50 :client_process) start reading
+DEBUG: (src/server.c :24 :read_some) fd is : 5 :2
+DEBUG: (src/server.c :28 :read_some) ok then byte_recv is 0
+DEBUG: (src/server.c :29 :read_some) hmmmmm
+ERROR: (src/ringbuffer.c : 112 :RingBuffer_gets :errno None )Need more than 0 for gets,you gave 0
+DEBUG: (bin/stats_server.c :58 :client_process) ok after read_some, maybe the problem in send
