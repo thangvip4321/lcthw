@@ -6,12 +6,15 @@
 #include <stdlib.h>
 #include <lcthw/dbg.h>
 #include <list.h>
+#include <mysql.h>
 int position = 0;
 struct tagbstring commandl = bsStatic("list");
 struct tagbstring commandc = bsStatic("create");
 struct tagbstring commandr = bsStatic("read");
 struct tagbstring commandu = bsStatic("update");
 struct tagbstring commandd = bsStatic("delete");
+struct tagbstring commands = bsStatic("save");
+struct tagbstring commandlo = bsStatic("load");
 struct bstrList* process_string(char* string){
 	bstring mid = bfromcstr(string);
 	btrimws(mid);
@@ -25,6 +28,7 @@ return list;
 typedef struct stats_packet{
 	bstring url;
 	Stats* stats;
+	char changed;
 }stats_packet;
 
 TSTree* create_request(TSTree *root, bstring url){
@@ -107,6 +111,13 @@ char* list_request(TSTree* root){
 	int i = 0;
 	TSTree_traverse(root,add_string,&list);
 	return final_list;
+}
+char* save_request(TSTree* root,DArray* list){
+	// save only modified nodes to sql database to save execution time
+	return NULL;
+}
+char* load_request(TSTree** root){
+
 }
 char* process_request(TSTree **root,char* commands){
 	debug("a/b/c address: %p",(TSTree_pinpoint(*root,"a/b/c",5)));

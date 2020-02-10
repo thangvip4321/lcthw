@@ -419,26 +419,43 @@
 			"file": "bin/stats_server.c",
 			"settings":
 			{
-				"buffer_size": 4335,
+				"buffer_size": 4332,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"contents": "#include <lcthw/proc_request.h>\n#include <lcthw/tstree.h>\n#include \"minunit.h\"\n#include <lcthw/bstrlib.h>\n#include <mysql.h>\nTSTree* node = NULL;\nTSTree* node1 = NULL;\nchar* str = NULL;\nstruct tagbstring com1 = bsStatic(\"create\");\nstruct tagbstring com2 = bsStatic(\"read\");\nstruct tagbstring com3 = bsStatic(\"update\");\nstruct tagbstring com4 = bsStatic(\"delete\");\nchar* test_create(){\n\tstr = process_request(&node,\"create a/b/c\");\n\tmu_assert((node !=NULL),\"create node wrongly?\");\n\tstr = process_request(&node,\"create a/b/d\");\n\tmu_assert((TSTree_pinpoint(node,\"a/b/c\",5))->stat !=NULL,\"create node without stat\");\n\tdebug(\"root is %p\",node);\n\treturn NULL;\n}\nchar* test_update(){\n\tstr = process_request(&node,\"update a/b/c 1 2 3 4\");\n\tmu_assert((str !=\"ok\"),\"should have updated the existing url\");\n\tdebug(\"a/b/c: %d and %f\",(TSTree_pinpoint(node,\"a/b/c\",5)->stat->n),(TSTree_pinpoint(node,\"a/b/c\",5)->stat->sum));\n\tmu_assert((process_request(&node,\"update clgt 1 2 3 4\") ==\"no such statistic\"),\"handler error in update\");\n\tmu_assert((TSTree_pinpoint(node,\"a/b/c\",5)->stat->sum == 10),\"should have the sum of 10\");\n\tmu_assert((TSTree_pinpoint(node,\"a/b/c\",5)->stat->n == 4),\"should have the num of 4\");\n\tmu_assert((process_request(&node,\"update a/b/d 1 3 5\") ==\"ok\\n\"),\"handler failed to update existing node\");\n\tdebug(\"a/b/: %d and %f\",(TSTree_pinpoint(node,\"a/b/\",4)->stat->n),(TSTree_pinpoint(node,\"a/b/\",4)->stat->sum));\n\tmu_assert((TSTree_pinpoint(node,\"a/b/\",4))->stat->sum == 5.5,\"ok handler update node not as expected\");\n\tmu_assert((TSTree_pinpoint(node,\"a/b/\",4)->stat->n == 2),\"should have the num of 2\");\n\treturn NULL;\n}\nchar* test_read(){\n\tstr = process_request(&node,\"read a/b/c\");\n\tmu_assert((str !=\"no such statistic\"),\"ok why cant it read?\");\n\tstr = process_request(&node,\"read a/b/q\");\n\tmu_assert((str ==\"no such statistic\\n\"),\"ok why can it read non-existing node now?\");\n\tdebug(\"root is %p\",node);\n\n\treturn NULL;\n}\nchar* test_after_load(){\n\tmu_assert((TSTree_pinpoint(node1,\"a/b/c\",5)->stat->sum == 10),\"should have the sum of 10\");\n\tmu_assert((TSTree_pinpoint(node1,\"a/b/c\",5)->stat->n == 4),\"should have the num of 4\");\n\tmu_assert((TSTree_pinpoint(node1,\"a/b/\",4))->stat->sum == 5.5,\"ok handler update node not as expected\");\n\tmu_assert((TSTree_pinpoint(node1,\"a/b/\",4)->stat->n == 2),\"should have the num of 2\");\n\tmu_assert((process_request(&node1,\"update a/b/d 1 3 5\") ==\"ok\\n\"),\"handler failed to update existing node\");\n\tstr = process_request(&node1,\"read a/b/c\");\n\tmu_assert((str !=\"no such statistic\"),\"ok why cant it read?\");Love Me Less (feat. Kim Petras)\n\tstr = process_request(&node1,\"read a/b/q\");\n\tmu_assert((str ==\"no such statistic\\n\"),\"ok why can it read non-existing node now?\");\n\treturn NULL;\n}\nchar* test_delete(){\n\tstr = process_request(&node,\"delete a/b/f\");\n\tdebug(\"root is %p\",node);\n\tmu_assert((str ==\"no such statistic\\n\"),\"ok TSTree_pinpoint hasnt done its job well enough \");\n\tstr = process_request(&node,\"delete a/b/d\");\n\tmu_assert(process_request(&node,\"read a/b/d\") == \"no such statistic\\n\",\"handler forgot to delete the node\");\n\tdebug(\"%f\",(TSTree_pinpoint(node,\"a/b/\",4))->stat->sum);\n\tmu_assert((TSTree_pinpoint(node,\"a/b/\",4))->stat->sum == 2.5,\"delete forget to re_calculate means\");\n\tmu_assert((TSTree_pinpoint(node,\"a/b/\",4))->stat->n == 1,\"delete forget to re count subnodes\");\n\tstr = process_request(&node,\"delete a/b/\");\n\tmu_assert(process_request(&node,\"read a/b/c\") == \"no such statistic\\n\",\"handler forgot to delete the node\");\n\n\treturn NULL;\n}\nchar* test_save_load(){\n\tstr = process_request(&node,\"save a/b/c\");\n\tmu_assert(str ==\"saved\",\"seems like data is not saved as expected\");\n\tstr = load_request(&node);\n\tmu_assert(str == \"load\",\"huh what tf happened with the saved file?\");\n\t//str = process_request(&node1,\"load\");\n\t//mu_assert(str ==\"loaded\",\"error in loading data\");\n\t// as if we're going to let the customer load such a huge ass resource-consuming database.\n\treturn NULL;\n}\nchar* test_list(){\n\treturn NULL;\n}\nchar* all_test(){\n\tmu_suite_start();\n\tmu_run_test(test_create);\n\tmu_run_test(test_update);\n\tmu_run_test(test_read);\n\tmu_run_test(test_save_load);\n\tmu_run_test(test_after_load);\n\tmu_run_test(test_delete);\n\treturn NULL;\n}\nRUN_TESTS(all_test);",
 			"file": "test/proc_request_tests.c",
+			"file_size": 4216,
+			"file_write_time": 132257830812166201,
 			"settings":
 			{
-				"buffer_size": 2628,
+				"buffer_size": 4222,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
+			"contents": "#include <stdio.h>\n#include <lcthw/bstrlib.h>\n#include <regex.h>\n#include <lcthw/stats.h>\n#include <lcthw/tstree.h>\n#include <stdlib.h>\n#include <lcthw/dbg.h>\n#include <list.h>\n#include <mysql.h>\nint position = 0;\nstruct tagbstring commandl = bsStatic(\"list\");\nstruct tagbstring commandc = bsStatic(\"create\");\nstruct tagbstring commandr = bsStatic(\"read\");\nstruct tagbstring commandu = bsStatic(\"update\");\nstruct tagbstring commandd = bsStatic(\"delete\");\nstruct tagbstring commands = bsStatic(\"save\");\nstruct tagbstring commandlo = bsStatic(\"load\");\nstruct bstrList* process_string(char* string){\n\tbstring mid = bfromcstr(string);\n\tbtrimws(mid);\n\tstruct bstrList* list = bsplit(mid,' ');\n\t//for(int i = 0;list->entry[i] !=NULL;i++){\n\t\t//debug(\"%p\",bdata(list->entry[i]));\n\t\t//debug(\"%s ,%d\",bdata(list->entry[i]),blength(list->entry[i])); // wtf is wrong with this shit?????????\n//}\nreturn list;\n}\ntypedef struct stats_packet{\n\tbstring url;\n\tStats* stats;\n\tchar changed;\n}stats_packet;\n\nTSTree* create_request(TSTree *root, bstring url){\n\tStats* stat0 = Stats_create();\n\tstats_packet* pack = malloc(sizeof(stats_packet));\n\tpack->stats = stat0;\n\tdebug(\"%p\",pack->stats);\n\tpack->url = bstrcpy(url);\n\troot = TSTree_delim_insert(root,bdata(url),blength(url),pack); //sound very unsure about this, should have put **root\n\treturn root;\n}\nchar* read_request(TSTree *root,bstring url){\n\t//use to read the request given root and url\n\t//arg: TSTree* root, bstring url\n\tdebug(\"still ok here?\");\n\tstats_packet* pack =TSTree_search(root,bdata(url),blength(url)); //maybe try approximate first\n\tdebug(\"after this?\");\n\tcheck((pack !=NULL),\" error: statistic doesn't exist\");\n\tchar* dump = malloc(150);\n\tStats* stat0 =pack->stats;\n\tdebug(\"this? : %p, %p\",pack,pack->stats);\n\tsprintf(dump,\"sum : %f, sumsq %f, n: %ld,min:%f, max: %f,mean: %f, stddev: %f \\n\",stat0->sum,stat0->sumsq,stat0->n,stat0->min,stat0->max,Stats_mean(stat0),Stats_stddev(stat0));\n\treturn dump;\n\terror:\n\treturn \"no such statistic\\n\";\n}\nchar* update_request(TSTree* root,bstring url,struct bstrList *list){\n\tList* delim_list = List_create();\n\t//stats_packet* pack = TSTree_delim_search(root,delim_list,bdata(url),blength(url)); \n\tstats_packet* pack = TSTree_delim_search(root,delim_list,bdata(url),blength(url)); \n\tdebug(\"length of list is %d\",List_count(delim_list));\n\tTSTree* node1 = TSTree_pinpoint(root,bdata(url),blength(url));\n\tif(node1 == NULL ){\n\t\treturn \"no such statistic\";\n\t}\n\tStats* temp_stat = malloc(sizeof(Stats));\n\t*(temp_stat) = *(node1->stat);\n\tfor(int i=2;list->entry[i] !=NULL;i++){\n\t\tStats_sample(temp_stat,atof(bdata(list->entry[i])));\n\t}\n\tint me = update_tracer(delim_list,temp_stat);\n\tdebug(\"a/b/: %f\",(TSTree_pinpoint(root,\"a/b/\",4)->stat->sum));\n\tList_destroy(list);\n\tif(me != 0){\n\t\treturn \"error updating\\n\";\n\t}\n\t/*for(int i=0;List_count(delim_list) >1;i++){\n\t\tTSTree* node = List_pop(delim_list);\n\t\tTSTree* prev = List_last(delim_list);\n\t\tStats_sample(prev->stat,node->stat->sum / node->stat->n);\n\t\tprev->stat->n -= 1;\n\t}*/\n\treturn \"ok\\n\";\n}\nchar* delete_request(TSTree* root,bstring url){\n\treturn (TSTree_delete_all_subnodes(root,bdata(url),blength(url))==0) ? \"deleted\\n\" : \"no such statistic\\n\";\n\n\t/*debug(\"%p, %p\",pack,pack->stats);\n\tfree(pack->stats);\n\tpack->stats = NULL;\n\tfree(pack->url);\n\tpack->url = NULL;\n\tfree(pack);\n\tpack = NULL; */  \n\t// very bad code here, can't just free pointer and leave it dangling there, might be attacked.\n}\nvoid* add_string(stats_packet* pack,char** list){\n\tbstring data = pack->url;\n\tchar* string = bdata( data);\n\tdebug(\"ok here: %p\",*list);\n\tsprintf(*list,\"%s\\n\",string);\n\tdebug(\"%s\",*list);\n\t*list += blength(data)+1;\n}\nchar* list_request(TSTree* root){\n\tdebug(\"ok after list_triggered\");\n\tchar* list = malloc(1024*1024);\n\tdebug(\"list in root is: %p\",list);\n\tchar* final_list= list;\n\tint i = 0;\n\tTSTree_traverse(root,add_string,&list);\n\treturn final_list;\n}\nchar* save_request(TSTree* root,bstring url){\n\t// save only modified nodes to sql database to save execution time\n\treturn NULL;\n}\nchar* load_request(TSTree** root,bstring url_src,bstring url_dest){\n\t\n}\nchar* process_request(TSTree **root,char* commands){\n\tdebug(\"a/b/c address: %p\",(TSTree_pinpoint(*root,\"a/b/c\",5)));\n\tif(commands ==NULL)\n\t\treturn \"no argument sent\";\n\tbstring name = NULL;\n\tstats_packet *pac =malloc(sizeof(stats_packet));\n\tint i = 0;\n\tdebug(\"command is %s\",commands);\n\tchar* data = malloc(100);\n\tstruct bstrList *list =process_string(commands);\n\tdebug(\"data is : %s and name is %s\",bdata(list->entry[0]),bdata(list->entry[1]));\n\tif(bstrcmp(list->entry[0],&commandc) ==0){\n\t\t*root = create_request(*root, list->entry[1]);\n\t\treturn \"create stats successfully\\n\";\n\t}\n\tif(bstrcmp(list->entry[0],&commandr) == 0){\n\t\tdebug(\"still ok?\");\n\t\tchar* rs =read_request(*root,list->entry[1]); //problem here?\n\t\tif (rs ==NULL)\n\t\t\treturn \"error with read_request\\n\";\n\t\telse\n\t\t\treturn rs;\n\t}\n\tif(bstrcmp(list->entry[0],&commandu) ==0){\n\t\t//char* wow= update_request(*root,list->entry[1],list);\n\t\t//debug(\"a/b/c: %f\",(TSTree_pinpoint(*root,\"a/b/c\",5)->stat->sum));\n\t\treturn update_request(*root,list->entry[1],list);\n\t}\n\tif(bstrcmp(list->entry[0],&commandd) ==0){\n\t\treturn delete_request(*root,list->entry[1]);\n\t}\n\tif(bstrcmp(list->entry[0],&commandl) ==0){\n\t\tdebug(\"before request?\");\n\t\treturn list_request(*root);\n\t}\n\telse\n\t\treturn \"wrong format\\n\";\n}\n#if 0\nchar* process_request(TSTree **root,char* commands){// considering bstring commands\n\tcheck((commands !=NULL),\"no data sent\");\n\tbstring name = NULL;\n\tStats *stat0 = NULL;\n\tstats_packet *pac = malloc(sizeof(stats_packet));\n\tint i = 0;\n\tdebug(\"root is %p\",*root);\n\tdebug(\"%s\",commands);\n\tchar* data = malloc(100);\n\tstruct bstrList *list = process_string(commands); // process string into commands and url\n\tdebug(\"data is : %s and name is %s\",bdata(list->entry[0]),bdata(list->entry[1]));\t\n\t//create\n\tif(bstrcmp(list->entry[0],&commandc) == 0){\n\tname = list->entry[1];\n\tcheck((name !=NULL),\"USAGE: create <stats_name>\");\n\tstat0 = Stats_create();\n\tpac->stats = stat0;\n\tpac->url = bdata(name);\n\t*root = TSTree_insert(*root,bdata(name),blength(name),pac);\n\treturn \"ok\";\n\t}\n\t//read\n\telse if(bstrcmp(list->entry[0],&commandr) == 0){\n\tname = list->entry[1];\n\tprintf(\"names: %s\",bdata(name));\n\tcheck((name !=NULL),\"USAGE: read <stats_name>\");\n\tpac = TSTree_search(*root,bdata(name),blength(name));\n\tif(pac == NULL){\n\t\treturn \"no such statistic\";\n\t}\n\telse{\n\t\tchar* dump = malloc(150);\n\t\tstat0 = pack->stats;\n\t\tsprintf(dump,\"sum : %f, sumsq %f, n: %ld,min:%f, max: %f,mean: %f, stddev: %f \\n\",stat0->sum,stat0->sumsq,stat0->n,stat0->min,stat0->max,Stats_mean(stat0),Stats_stddev(stat0));\n\t\treturn dump;\n\t}\n\t}\n\t//update\n\telse if(bstrcmp(list->entry[0],&commandu) ==0){\n\tname = list->entry[1];\n\tprintf(\"names: %s\",bdata(name));\n\tcheck((name !=NULL),\"USAGE: update <stats_name> <numbers>\");\n\tstat0 = TSTree_search(*root,bdata(name),blength(name));\n\tif(stat0 ==NULL){\n\t\treturn \"no such stat\";\n\t}else{\n\tfor(int i =2;list->entry[i] !=NULL;i++){\n\t\t\tStats_sample(stat0,atof(bdata(list->entry[i]))); // ok so string data will get processed as 0.0 which we dont want\n\t\t}\n\t\treturn \"ok\";\n\t}\n\t//delete\n\t}else if(bstrcmp(list->entry[0],&commandd) ==0){\n\t\tname = list->entry[1];\n\t\tcheck((name !=NULL),\"USAGE: delete <stats_name>\");\n\t\tTSTree_delete(*root,bdata(name),blength(name)); \n\t\treturn \"ok\";\n\t}else if(bstrcmp(list->entry[0],&commandl)==0){\n\t\t//list_data(*root,&i,data);\n\t\treturn data;\n\t}\n\telse{\n\t\treturn \"wrong format create read update delete list\\n\";\n\t}\n\terror:\n\tdebug(\"wtf wrong\");\n\treturn \"uh oh\";\n}\n#endif \n/*void* client_process(void* arg){\n\tint byte_send = 0;\n\tRingBuffer *buffer = RingBuffer_create(BUFFER_SIZE);\n\tsock_pack * packet = arg;\n\tstruct sockaddr_storage addr_storage =  packet->addrs;\n\tint sockfd = packet->sockfd;\n\tsize_t* addr_size = packet->storage_size; \n\t//TSTree *root_thread = packet->data;\n\tint new_sock = accept(sockfd,(struct sockaddr*) &addr_storage,&addr_size);\n\tchar* respond = malloc(1024*1024);\n\tif(new_sock == -1){\n\t\tperror(\"cant find sockfd\");\n\t\texit(-1);\n\t}\n\t//int error_code;\n\t//int error_code_size = sizeof(error_code);\n\t//if (setsockopt(new_sock,SOL_SOCKET,MSG_NOSIGNAL,&optval,sizeof(optval)) !=0 ){ //almost work sadly no SO_NOSIGPIPE in linux (weird) \n\t//\tperror(\" error with setsockopt\");\n\t//\texit(-1);\n\t//}\n\twhile(errno != EPIPE){ // hmmm what if we create a error not EPIPE in this while shit :v \n\t\t\t\tdebug(\"start reading\");\n\t\t\t\tread_some(new_sock,buffer); // ok problem with recv blocking? so we can't check the condition if the file exist.\n\t\t\t\tbstring data = RingBuffer_get_all(buffer);\n\t\t\t\tpthread_mutex_lock(&lock);\n\t\t\t\trespond = process_request((TSTree**) packet->data,bdata(data)); // why rs span a lot?????????  hmm not quite efficient? change process request?\n\t\t\t\t//add an option quit (q) to exit safely\n\t\t\t\tpthread_mutex_unlock(&lock);\n\t\t\t\t//check((rs != NULL),\"dit con me loi r em oi\"); error: server exit after clients\n\t\t\t\tdebug(\"ok after read_some, maybe the problem in send\");\n\t\t\t\tbyte_send = send(new_sock,respond,strlen(respond),MSG_NOSIGNAL);\n\t\t\t\t//debug(\"status: %d\",getsockopt(new_sock, SOL_SOCKET, SO_ERROR, &error_code, &error_code_size));\n\t\t\t\t//debug(\"wtf error code :%d\",error_code);\n\t\t\t}\n\t\tclose(new_sock);\n\t\tpthread_exit(NULL);\n\t}\n\t*/ ",
 			"file": "src/proc_request.c",
+			"file_size": 9193,
+			"file_write_time": 132257833896794007,
 			"settings":
 			{
-				"buffer_size": 8895,
+				"buffer_size": 9226,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "#ifndef _proc_request_\n#define _proc_request_\n#include <stdio.h>\n#include <lcthw/tstree.h>\nchar* process_request(TSTree** root,char* commands);\nchar* load_request(TSTree** root);\nchar* save_request(TSTree** root);\n#endif",
+			"file": "src/lcthw/proc_request.h",
+			"file_size": 150,
+			"file_write_time": 132188004468485200,
+			"settings":
+			{
+				"buffer_size": 220,
 				"line_ending": "Unix"
 			}
 		},
@@ -455,7 +472,7 @@
 			"file": "src/tstree.c",
 			"settings":
 			{
-				"buffer_size": 8992,
+				"buffer_size": 9025,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -627,9 +644,6 @@
 	},
 	"expanded_folders":
 	[
-		"/E/gay/liblcthw/test",
-		"/E/gay/liblcthw/src",
-		"/E/gay/liblcthw/bin"
 	],
 	"file_history":
 	[
@@ -782,7 +796,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -791,15 +805,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4335,
+						"buffer_size": 4332,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2919,
+								2919
 							]
 						],
 						"settings":
@@ -808,10 +822,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 201.0,
+						"translation.y": 288.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -820,23 +834,24 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2628,
+						"buffer_size": 4222,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								570,
-								570
+								3670,
+								3670
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C.sublime-syntax"
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 239.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -848,15 +863,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8895,
+						"buffer_size": 9226,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3994,
+								3994
 							]
 						],
 						"settings":
@@ -865,14 +880,42 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 806.0,
+						"translation.y": 840.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/lcthw/proc_request.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 220,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								213,
+								213
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "src/lcthw/tstree.h",
 					"semi_transient": false,
 					"settings":
@@ -897,24 +940,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "src/tstree.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8992,
+						"buffer_size": 9025,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7623,
-								7623
+								8100,
+								8100
 							]
 						],
 						"settings":
@@ -923,14 +966,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3944.8,
+						"translation.y": 3697.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "test/tstree_tests.c",
 					"semi_transient": false,
 					"settings":
@@ -955,11 +998,11 @@
 						"translation.y": 109.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "test/test.sh",
 					"semi_transient": false,
 					"settings":
@@ -984,11 +1027,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "src/lcthw/bstrlib.h",
 					"semi_transient": false,
 					"settings":
@@ -1014,11 +1057,11 @@
 						"translation.y": 986.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "src/server.c",
 					"semi_transient": false,
 					"settings":
@@ -1043,11 +1086,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
 					"file": "src/stats.c",
 					"semi_transient": false,
 					"settings":
@@ -1072,11 +1115,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "bin/urlor.c",
 					"semi_transient": false,
 					"settings":
@@ -1101,11 +1144,11 @@
 						"translation.y": 2.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "src/lcthw/server.h",
 					"semi_transient": false,
 					"settings":
@@ -1130,11 +1173,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "makefile",
 					"semi_transient": false,
 					"settings":
@@ -1159,11 +1202,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "test/server_tests.c",
 					"semi_transient": false,
 					"settings":
@@ -1188,11 +1231,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 15,
 					"file": "src/lcthw/ringbuffer.h",
 					"semi_transient": false,
 					"settings":
@@ -1216,7 +1259,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 14,
 					"type": "text"
 				}
 			]

@@ -2,7 +2,9 @@
 #include <lcthw/tstree.h>
 #include "minunit.h"
 #include <lcthw/bstrlib.h>
+#include <mysql.h>
 TSTree* node = NULL;
+TSTree* node1 = NULL;
 char* str = NULL;
 struct tagbstring com1 = bsStatic("create");
 struct tagbstring com2 = bsStatic("read");
@@ -38,6 +40,18 @@ char* test_read(){
 
 	return NULL;
 }
+char* test_after_load(){
+	mu_assert((TSTree_pinpoint(node1,"a/b/c",5)->stat->sum == 10),"should have the sum of 10");
+	mu_assert((TSTree_pinpoint(node1,"a/b/c",5)->stat->n == 4),"should have the num of 4");
+	mu_assert((TSTree_pinpoint(node1,"a/b/",4))->stat->sum == 5.5,"ok handler update node not as expected");
+	mu_assert((TSTree_pinpoint(node1,"a/b/",4)->stat->n == 2),"should have the num of 2");
+	mu_assert((process_request(&node1,"update a/b/d 1 3 5") =="ok\n"),"handler failed to update existing node");
+	str = process_request(&node1,"read a/b/c");
+	mu_assert((str !="no such statistic"),"ok why cant it read?");Love Me Less (feat. Kim Petras)
+	str = process_request(&node1,"read a/b/q");
+	mu_assert((str =="no such statistic\n"),"ok why can it read non-existing node now?");
+	return NULL;
+}
 char* test_delete(){
 	str = process_request(&node,"delete a/b/f");
 	debug("root is %p",node);
@@ -52,6 +66,16 @@ char* test_delete(){
 
 	return NULL;
 }
+char* test_save_load(){
+	str = process_request(&node,"save");
+	mu_assert(str =="saved","seems like data is not saved as expected");
+	str = load_request(&node);
+	mu_assert(str == "load","huh what tf happened with the saved file?");
+	//str = process_request(&node1,"load");
+	//mu_assert(str =="loaded","error in loading data");
+	// as if we're going to let the customer load such a huge ass resource-consuming database.
+	return NULL;
+}
 char* test_list(){
 	return NULL;
 }
@@ -60,6 +84,8 @@ char* all_test(){
 	mu_run_test(test_create);
 	mu_run_test(test_update);
 	mu_run_test(test_read);
+	mu_run_test(test_save_load);
+	mu_run_test(test_after_load);
 	mu_run_test(test_delete);
 	return NULL;
 }

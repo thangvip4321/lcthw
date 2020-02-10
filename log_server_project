@@ -48,3 +48,14 @@ suspecting that creating Stats only at delimiter node may leave many node:
 1. not NULL
 2. not delimiter
 Stats-less. ->cause segfault when trying to access?
+
+ok what do save() and load() do?
++save(TSTree* node, bstring url): save node with name url into mysql database.
+- do TSTree_search(url);
+-extract stat_packet: name, url,min, max, n, sumsq, sum.
+-update database (dont save parent node.)
+
++load(TSTree* node,bstring url_src, bstring url_dest): load from url_src in database into url_dest
+-search for url_src in db.
+-if exist: TSTree_delim_insert_ver2: ( allow duplicate + update): .retain same linked list
+
