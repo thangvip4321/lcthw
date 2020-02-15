@@ -39,11 +39,13 @@ TSTree* TSTree_delim_insert_base (TSTree *node,List* list,const char *key,size_t
 	TSTree* xxx = NULL;
 	check((key != NULL),"no key to insert");
 	if(node==NULL){
-		node = malloc(sizeof(TSTree));
+		node = calloc(1,sizeof(TSTree));
 		node->splitchar = *key;
+		node->value = NULL;
+		node->stat = NULL;
 		if (node->splitchar == delim){
 			node->stat = Stats_create(); //ok no problem
-			debug("node->stat is :%p",node->stat);
+			
 			xxx = List_last(list);
 			if (xxx != NULL){
 				xxx->stat->n +=1;
@@ -60,6 +62,7 @@ TSTree* TSTree_delim_insert_base (TSTree *node,List* list,const char *key,size_t
 			node->equal = TSTree_delim_insert_base(node->equal,list,key+1,len-1,value); 
 		}
 		else{
+			
 			check((node->value == NULL),"duplicate insert into tst");
 			node->value = value;
 			node->stat = Stats_create();
@@ -77,11 +80,61 @@ TSTree* TSTree_delim_insert_base (TSTree *node,List* list,const char *key,size_t
 	error:
 	return node;
 }
+TSTree* TSTree_delim_insert_update_base (TSTree *node,List* list,const char *key,size_t len,void *value,int* state){
+	TSTree* xxx = NULL;
+	check((key != NULL),"no key to insert");
+	if(node==NULL){
+		node = calloc(1,sizeof(TSTree));
+		node->splitchar = *key;
+		node->value = NULL;
+		node->stat = NULL;
+		if (node->splitchar == delim){
+			node->stat = Stats_create(); //ok no problem
+			
+			xxx = List_last(list);
+			if (xxx != NULL){
+				xxx->stat->n +=1;
+			}
+		}
+	}
+	if(node->splitchar == delim){
+		List_push(list, node);
+	}
+	if(*key > node->splitchar){
+		node->high = TSTree_delim_insert_update_base(node->high,list,key,len,value,state);
+	}else if(*key == node->splitchar){
+		if(len >1){
+			node->equal = TSTree_delim_insert_update_base(node->equal,list,key+1,len-1,value,state); 
+		}
+		else{
+			
+			if(node->value !=NULL){
+				fprintf(stderr,"duplicate insert into tst");
+				*state = -1;
+			}
+			node->value = value;
+			node->stat = Stats_create();
+			xxx = List_last(list);
+			if(xxx !=NULL){
+				xxx->stat->n +=1;
+			}
+			List_push(list, node);
+		}
+
+	}
+	else{
+		node->low = TSTree_delim_insert_update_base(node->low,list,key,len,value,state);
+	}
+	return node;
+	error:
+	return node;
+}
 TSTree* TSTree_delim_insert(TSTree* root,const char*key,size_t len,void* value){
 	List* list = List_create();
 	root = TSTree_delim_insert_base(root,list,key,len,value);
 	List_destroy(list);
 	return root;
+
 	/*for(int i=0; i <delim_count-1;i++){
 		node = List_pop(list);
 		TSTree *last = List_last(list);
@@ -91,8 +144,22 @@ TSTree* TSTree_delim_insert(TSTree* root,const char*key,size_t len,void* value){
 	}
 */
 }
+
+void* TSTree_delim_insert_load(TSTree *root,const char *key,size_t len,void *value,Stats* src,int* state){
+	check(src !=NULL,"cannot copy a NULL TSTree");
+	List* list = List_create();
+	root = TSTree_delim_insert_update_base(root,list,key,len,value,state);
+	if(*state != -1){
+	Stats* new_stat = src;
+	update_tracer(list,new_stat);
+	}
+	return root;
+	error:
+	return root;
+}
 TSTree* TSTree_pinpoint(TSTree *root,const char *key,size_t len){
 	TSTree *node = root;
+	check(root !=NULL,"cant find an empty tree");
 	size_t i = 0;
 	while ((i <len) && (node !=NULL)){
 		if (key[i] <node->splitchar){
@@ -107,6 +174,8 @@ TSTree* TSTree_pinpoint(TSTree *root,const char *key,size_t len){
 		}
 	}
 		return node;
+	error:
+		return NULL;
 	}
 void* TSTree_search(TSTree *root,const char *key,size_t len){
 	TSTree *node = root;
@@ -152,17 +221,18 @@ void* TSTree_delim_search(TSTree* root,List* list,const char *key,size_t len){
 	}
 		if (node)
 		{	
-			debug("node be4 push: %p",node->value);
+			
 			if(node->splitchar != delim){
 				List_push(list,node);
 			}
-			debug("node after push: %p",node->value);
+			
 			return node->value;
 		}
 		else{
 			return NULL;
 		}
 }
+
 void* TSTree_search_prefix(TSTree *root,const char *key,size_t len){
 	if(len == 0){
 		return NULL;
@@ -240,7 +310,7 @@ int TSTree_delete(TSTree *root,const char* key,size_t len){
 			node = node->high;
 		}
 	}
-	debug("node found is %p with splitchar",node);
+	
 	if(!node){
 		return -1;
 	}
@@ -263,11 +333,11 @@ int update_tracer(List* list, Stats* new_stat){
 		Stats* value1 = ((TSTree*)node->value)->stat;
 		Stats* value2 = (node->next != NULL) ? ((TSTree*)node->next->value)->stat : NULL;
 		if( value1 ==NULL || value2 ==NULL){
-			debug("node is empty");
+			
 			break;
 		}
 		else{
-			debug("oh ok man");
+			
 			double old_mean = (value2->n != 0) ? value2->sum /value2->n : 0;
 			value1->sum -= old_mean;
 			value1->sumsq -= old_mean * old_mean;
@@ -280,17 +350,17 @@ int update_tracer(List* list, Stats* new_stat){
 		Stats* value1 =((TSTree*)node->value)->stat;
 		Stats* value2 =(node->prev != NULL) ? ((TSTree*)node->prev->value)->stat : NULL;
 		if( value1 == NULL || value2 ==NULL ){
-			debug("node is empty");
+			
 			break;
 		}
 		else{
 			double new_mean = (value1->n != 0) ? value1->sum / value1->n : 0;
-			debug("oh ok again");
+			
 			value2->sum += new_mean;
 			value2->sumsq += new_mean*new_mean;
 		}
 	}
-	debug("stat is %f",((TSTree*) list_last->value)->stat->sum);
+	
 	return 0;
 	error:
 	return -1;

@@ -21,19 +21,16 @@ void* get_inaddr(struct sockaddr_storage *addr){
 void read_some(int sockfd,RingBuffer *buffer){
 	int byte_recv =0;
 	check((RingBuffer_available_space(buffer) > 0),"out of space, release some data");
-	debug("fd is : %d :%d",sockfd,fcntl(sockfd,F_GETFL,0));
 	if(buffer->looped == 0){
 		byte_recv = recv(sockfd,RingBuffer_ends_at(buffer),buffer->length - buffer->end,0);
 		if(byte_recv < buffer->length- buffer->end){
 			debug("ok then byte_recv is %d",byte_recv);
-			debug("hmmmmm");
 			RingBuffer_commit_write(buffer,byte_recv);
 			return ;
 		}else{
 			debug("ok then not enough, byte_recv is %d",byte_recv);
 			RingBuffer_commit_write(buffer,byte_recv);
 			byte_recv = recv(sockfd,RingBuffer_ends_at(buffer),RingBuffer_available_space(buffer),0);
-			debug("ok then not enough residue byte_recv is %d",byte_recv);
 			RingBuffer_commit_write(buffer,byte_recv);
 		}
 	}else{
@@ -41,6 +38,7 @@ void read_some(int sockfd,RingBuffer *buffer){
 		RingBuffer_commit_write(buffer,byte_recv);
 	}
 	error:
+	errno = EOVFL;
 	return;
 	
 }

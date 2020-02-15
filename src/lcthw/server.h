@@ -2,6 +2,7 @@
 #define _lcthw_server_h_
 #include <lcthw/ringbuffer.h>
 #include <sys/socket.h>
+#define EOVFL 113
 int echo_server(char* host,char* port); //make a server binding to a specific port
 void read_some(int sockfd,RingBuffer *buffer);
 void write_some(int sockfd,RingBuffer *buffer);

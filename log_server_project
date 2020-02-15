@@ -55,6 +55,18 @@ ok what do save() and load() do?
 -extract stat_packet: name, url,min, max, n, sumsq, sum.
 -update database (dont save parent node.)
 
+
+
+//ok project done.
+Now improve:
+1. Threads exit after Ctrl+C -> connect 10 times and server will die.
+->.make thread lives forever.
+.make thread restart on accept? (restart?) (well restart is a bad idea0 -> x
+(fixed)
+2. nc ... and </dev/urandom -> system gonna crash
+-> limit buffer size, done -> but where's my error msg sending
+seems like send has yet to send the data over socket before the sk is closed? Why?
+
 +load(TSTree* node,bstring url_src, bstring url_dest): load from url_src in database into url_dest
 -search for url_src in db.
 -if exist: TSTree_delim_insert_ver2: ( allow duplicate + update): .retain same linked list

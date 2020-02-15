@@ -10,67 +10,76 @@ struct tagbstring com1 = bsStatic("create");
 struct tagbstring com2 = bsStatic("read");
 struct tagbstring com3 = bsStatic("update");
 struct tagbstring com4 = bsStatic("delete");
+MYSQL* con = NULL;
+char* start_database(){
+	con = mysql_db_init();
+	if( con == NULL){
+		finish_with_error(con);
+	}
+	return NULL;
+}
 char* test_create(){
-	str = process_request(&node,"create a/b/c");
+	str = process_request(&node,"create a/b/c",con);
 	mu_assert((node !=NULL),"create node wrongly?");
-	str = process_request(&node,"create a/b/d");
+	str = process_request(&node,"create a/b/d",con);
 	mu_assert((TSTree_pinpoint(node,"a/b/c",5))->stat !=NULL,"create node without stat");
 	debug("root is %p",node);
 	return NULL;
 }
 char* test_update(){
-	str = process_request(&node,"update a/b/c 1 2 3 4");
+	str = process_request(&node,"update a/b/c 1 2 3 4",con);
 	mu_assert((str !="ok"),"should have updated the existing url");
 	debug("a/b/c: %d and %f",(TSTree_pinpoint(node,"a/b/c",5)->stat->n),(TSTree_pinpoint(node,"a/b/c",5)->stat->sum));
-	mu_assert((process_request(&node,"update clgt 1 2 3 4") =="no such statistic"),"handler error in update");
+	mu_assert((process_request(&node,"update clgt 1 2 3 4",con) =="no such statistic"),"handler error in update");
 	mu_assert((TSTree_pinpoint(node,"a/b/c",5)->stat->sum == 10),"should have the sum of 10");
 	mu_assert((TSTree_pinpoint(node,"a/b/c",5)->stat->n == 4),"should have the num of 4");
-	mu_assert((process_request(&node,"update a/b/d 1 3 5") =="ok\n"),"handler failed to update existing node");
+	mu_assert((process_request(&node,"update a/b/d 1 3 5",con) =="ok\n"),"handler failed to update existing node");
 	debug("a/b/: %d and %f",(TSTree_pinpoint(node,"a/b/",4)->stat->n),(TSTree_pinpoint(node,"a/b/",4)->stat->sum));
 	mu_assert((TSTree_pinpoint(node,"a/b/",4))->stat->sum == 5.5,"ok handler update node not as expected");
 	mu_assert((TSTree_pinpoint(node,"a/b/",4)->stat->n == 2),"should have the num of 2");
 	return NULL;
 }
 char* test_read(){
-	str = process_request(&node,"read a/b/c");
+	str = process_request(&node,"read a/b/c",con);
 	mu_assert((str !="no such statistic"),"ok why cant it read?");
-	str = process_request(&node,"read a/b/q");
+	str = process_request(&node,"read a/b/q",con);
 	mu_assert((str =="no such statistic\n"),"ok why can it read non-existing node now?");
 	debug("root is %p",node);
 
 	return NULL;
 }
 char* test_after_load(){
-	mu_assert((TSTree_pinpoint(node1,"a/b/c",5)->stat->sum == 10),"should have the sum of 10");
-	mu_assert((TSTree_pinpoint(node1,"a/b/c",5)->stat->n == 4),"should have the num of 4");
-	mu_assert((TSTree_pinpoint(node1,"a/b/",4))->stat->sum == 5.5,"ok handler update node not as expected");
-	mu_assert((TSTree_pinpoint(node1,"a/b/",4)->stat->n == 2),"should have the num of 2");
-	mu_assert((process_request(&node1,"update a/b/d 1 3 5") =="ok\n"),"handler failed to update existing node");
-	str = process_request(&node1,"read a/b/c");
-	mu_assert((str !="no such statistic"),"ok why cant it read?");Love Me Less (feat. Kim Petras)
-	str = process_request(&node1,"read a/b/q");
+	mu_assert((TSTree_pinpoint(node,"c/e/f",5)->stat->sum == 10),"should have the sum of 10");
+	mu_assert((TSTree_pinpoint(node,"c/e/f",5)->stat->n == 4),"should have the num of 4");
+	mu_assert((TSTree_pinpoint(node,"a/b/",4))->stat->sum == 5.5,"ok handler update node not as expected");
+	mu_assert((TSTree_pinpoint(node,"a/b/",4)->stat->n == 2),"should have the num of 2");
+	mu_assert((process_request(&node,"update a/b/d 1 3 5",con) =="ok\n"),"handler failed to update existing node");
+	str = process_request(&node,"read a/b/c",con);
+	mu_assert((str !="no such statistic"),"ok why cant it read?");
+	str = process_request(&node,"read a/b/q",con);
 	mu_assert((str =="no such statistic\n"),"ok why can it read non-existing node now?");
 	return NULL;
 }
 char* test_delete(){
-	str = process_request(&node,"delete a/b/f");
+	str = process_request(&node,"delete a/b/f",con);
 	debug("root is %p",node);
 	mu_assert((str =="no such statistic\n"),"ok TSTree_pinpoint hasnt done its job well enough ");
-	str = process_request(&node,"delete a/b/d");
-	mu_assert(process_request(&node,"read a/b/d") == "no such statistic\n","handler forgot to delete the node");
+	str = process_request(&node,"delete a/b/d",con);
+	mu_assert(process_request(&node,"read a/b/d",con) == "no such statistic\n","handler forgot to delete the node");
 	debug("%f",(TSTree_pinpoint(node,"a/b/",4))->stat->sum);
 	mu_assert((TSTree_pinpoint(node,"a/b/",4))->stat->sum == 2.5,"delete forget to re_calculate means");
 	mu_assert((TSTree_pinpoint(node,"a/b/",4))->stat->n == 1,"delete forget to re count subnodes");
-	str = process_request(&node,"delete a/b/");
-	mu_assert(process_request(&node,"read a/b/c") == "no such statistic\n","handler forgot to delete the node");
+	str = process_request(&node,"delete a/b/",con);
+	mu_assert(process_request(&node,"read a/b/c",con) == "no such statistic\n","handler forgot to delete the node");
 
 	return NULL;
 }
 char* test_save_load(){
-	str = process_request(&node,"save");
-	mu_assert(str =="saved","seems like data is not saved as expected");
-	str = load_request(&node);
-	mu_assert(str == "load","huh what tf happened with the saved file?");
+	str = process_request(&node,"save a/b/c",con);
+	debug("error is %s",str);
+	mu_assert(str =="saved\n","seems like data is not saved as expected");
+	str = process_request(&node,"load a/b/c c/e/f",con);
+	mu_assert(str == "loaded","huh what tf happened with the saved file?");
 	//str = process_request(&node1,"load");
 	//mu_assert(str =="loaded","error in loading data");
 	// as if we're going to let the customer load such a huge ass resource-consuming database.
@@ -81,6 +90,7 @@ char* test_list(){
 }
 char* all_test(){
 	mu_suite_start();
+	mu_run_test(start_database);
 	mu_run_test(test_create);
 	mu_run_test(test_update);
 	mu_run_test(test_read);

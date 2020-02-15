@@ -4,9 +4,7 @@ DEBUG: (test/server_tests.c :47 :all_test)
 DEBUG: (test/server_tests.c :15 :test_echo) new_fd: 4 
 DEBUG: (test/server_tests.c :48 :all_test) 
 ------test_read_write
-DEBUG: (src/server.c :24 :read_some) fd is : 4 :2
-DEBUG: (src/server.c :28 :read_some) ok then byte_recv is 11
-DEBUG: (src/server.c :29 :read_some) hmmmmm
+DEBUG: (src/server.c :27 :read_some) ok then byte_recv is 11
 DEBUG: (test/server_tests.c :22 :test_read_write) ok after read
 DEBUG: (test/server_tests.c :23 :test_read_write) available data is :11
 DEBUG: (test/server_tests.c :25 :test_read_write) XXX

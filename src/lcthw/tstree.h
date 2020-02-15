@@ -22,6 +22,7 @@ void* TSTree_delim_search_prefix(TSTree *root,const char *key,size_t len);
 typedef void (*TSTree_traverse_cb) (void *value,void *data);
 typedef void (*TSTree_delim_traverse_cb) (void *value,void *data);
 TSTree *TSTree_delim_insert(TSTree *node,const char* key,size_t len,void *value);
+TSTree* TSTree_delim_insert_update(TSTree *node,const char* key,size_t len,void *value);
 DArray *TSTree_possible_match_by_prefix(TSTree *root,const char* key,size_t len);
 void TSTree_traverse(TSTree *node,TSTree_traverse_cb cb,void *data);
 void TSTree_destroy(TSTree *root);
